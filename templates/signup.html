@@ -164,6 +164,15 @@
 </div>
 
   <div class="ui vertical stripe segment">
+    {% if error %}
+      <div class="ui warning message row">
+          <i class="close icon"></i>
+          <div class="header">
+              Validation Confirmation.
+          </div>
+           Team Email May be already registered.
+      </div>
+    {% endif %}
     <div class="ui middle aligned stackable grid container">
       <h1>Team Sign Up</h1>
       <div class="row">

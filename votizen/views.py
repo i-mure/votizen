@@ -22,14 +22,17 @@ def signup(request):
     if request.user.is_authenticated():
         return redirect('voting')
     if request.method == 'POST':
-        team_name = request.POST['team_name']
-        email = request.POST['email']
-        password = request.POST['password']
+        try:
+            team_name = request.POST['team_name']
+            email = request.POST['email']
+            password = request.POST['password']
 
-        team = User(first_name=team_name, username=email)
-        team.set_password(password)
-        team.save()
-
+            team = User(first_name=team_name, username=email)
+            team.set_password(password)
+            team.save()
+        except Exception as e:
+            User.objects.filter(id=team.id).delete()
+            return render(request, 'signup.html', {'error':True})
         team_id = team.id
         team_hash = hashlib.sha256(team.password.encode()).hexdigest()
         team_payload = {
@@ -87,7 +90,7 @@ def voting(request):
                 merge.update(r)
                 votizens.append(merge)
     return render(request, 'voting.html', {
-        'votizens': sorted(votizens),
+        'votizens': votizens,
         'has_voted': voted
     })
 
@@ -96,7 +99,6 @@ def voting(request):
 def vote(request, recipient=None):
     if recipient:
         team_id = request.user.id
-
         registered_hash = reg_block.team_registered(team_id)
         if registered_hash:
             voted = vot_block.team_voted(registered_hash)
@@ -106,7 +108,6 @@ def vote(request, recipient=None):
                     'recipient': recipient
                 }
                 vot_block.add_vot_transaction(vote_payload)
-
     return redirect('voting')
 
 
