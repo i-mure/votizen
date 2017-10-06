@@ -61,3 +61,21 @@ class Block:
     def add_vot_transaction(transaction):
         vot.find_one_and_update({'index': VOT_INDEX}, {
                                 '$push': {'transactions': transaction}})
+
+    @staticmethod
+    def team_registered(id):
+        if reg.find({'transactions': {'$elemMatch': {'team_id': id}}}).count() == 0:
+            return False
+        stored_transactions =  reg.find_one({'transactions': {'$elemMatch': {'team_id': id}}}).get('transactions', None)
+        team_hash = None
+        for t in stored_transactions:
+            if t['team_id'] == id:
+                team_hash = t['team_hash']
+        return team_hash
+
+    @staticmethod
+    def team_voted(team_hash):
+        if vot.find({'transactions':{'$elemMatch': {'team_hash': team_hash}}}).count() == 0:
+            return False
+        return True
+

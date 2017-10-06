@@ -74,3 +74,28 @@ def voting(request):
     return render(request, 'voting.html', {
         'votizens': votizens
     })
+
+
+@login_required
+def vote(request, recipient):
+    if request.method == 'POST':
+        team_id = request.user.id
+        reg_block = Block(
+            block='REG', timestamp=datetime.datetime.utcnow(), previous_hash=None)
+        vot_block = Block(
+            block='VOT', timestamp=datetime.datetime.utcnow(), previous_hash=None)
+
+        registered_hash = reg_block.team_registered(team_id)
+        if registered_hash:
+            voted = vot_block.team_voted(registered_hash)
+            if not voted:
+                vote_payload = {
+                    'team_hash': registered_hash,
+                    'recipient': recipient
+                }
+                vot_block.add_vot_transaction(vote_payload)
+
+        return redirect('voting')
+
+
+
