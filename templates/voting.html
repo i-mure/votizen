@@ -185,7 +185,7 @@
                             {{ votizen.first_name }}
                         </div>
                         <div class="meta">
-                            Friends of Veronika
+                            Vote for {{ votizen.first_name }} in this hackathon.
                         </div>
                         <div class="description">
                             Elliot requested permission to view your contact details
@@ -193,7 +193,7 @@
                     </div>
                     <div class="extra content">
                         <div class="ui two buttons">
-                            <div class="ui basic green button">Vote</div>
+                            <a class="ui basic green button" href="{% url 'vote' recipient=votizen.team_hash%}">Vote</a>
                         </div>
                     </div>
                 </div>                

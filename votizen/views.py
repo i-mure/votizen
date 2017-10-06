@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 
-from .blockchain import Block
+from .blockchain import Block, reg
 
 
 def home(request):
@@ -70,15 +70,24 @@ def user_logout(request):
 
 @login_required
 def voting(request):
-    votizens = User.objects.all()
+    users = list(User.objects.values('id', 'first_name'))
+    registered_votizens = reg.find_one().get('transactions')
+    votizens = []
+    for u in users:
+        merge = {}
+        for r in registered_votizens:
+            if u['id'] == r['team_id']:
+                merge.update(u)
+                merge.update(r)
+                votizens.append(merge)
     return render(request, 'voting.html', {
-        'votizens': votizens
+        'votizens': sorted(votizens)
     })
 
 
 @login_required
-def vote(request, recipient):
-    if request.method == 'POST':
+def vote(request, recipient=None):
+    if recipient:
         team_id = request.user.id
         reg_block = Block(
             block='REG', timestamp=datetime.datetime.utcnow(), previous_hash=None)
@@ -95,7 +104,7 @@ def vote(request, recipient):
                 }
                 vot_block.add_vot_transaction(vote_payload)
 
-        return redirect('voting')
+    return redirect('voting')
 
 
 
