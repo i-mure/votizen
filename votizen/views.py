@@ -8,6 +8,9 @@ from django.contrib.auth.models import User
 
 from .blockchain import Block, reg
 
+reg_block = Block(block='REG', timestamp=datetime.datetime.utcnow(), previous_hash=None)
+vot_block = Block(block='VOT', timestamp=datetime.datetime.utcnow(), previous_hash=None)
+
 
 def home(request):
     if request.user.is_authenticated():
@@ -33,8 +36,6 @@ def signup(request):
             'team_id': team_id,
             'team_hash': team_hash
         }
-        reg_block = Block(
-            block='REG', timestamp=datetime.datetime.utcnow(), previous_hash=None)
         reg_block.add_reg_transaction(team_payload)
 
         return render(request, 'login.html', {'success': True})
@@ -70,6 +71,11 @@ def user_logout(request):
 
 @login_required
 def voting(request):
+    team_id = request.user.id
+    voted = False
+    registered_hash = reg_block.team_registered(team_id)
+    if registered_hash:
+        voted = vot_block.team_voted(registered_hash)
     users = list(User.objects.values('id', 'first_name'))
     registered_votizens = reg.find_one().get('transactions')
     votizens = []
@@ -81,7 +87,8 @@ def voting(request):
                 merge.update(r)
                 votizens.append(merge)
     return render(request, 'voting.html', {
-        'votizens': sorted(votizens)
+        'votizens': sorted(votizens),
+        'has_voted': voted
     })
 
 
@@ -89,10 +96,6 @@ def voting(request):
 def vote(request, recipient=None):
     if recipient:
         team_id = request.user.id
-        reg_block = Block(
-            block='REG', timestamp=datetime.datetime.utcnow(), previous_hash=None)
-        vot_block = Block(
-            block='VOT', timestamp=datetime.datetime.utcnow(), previous_hash=None)
 
         registered_hash = reg_block.team_registered(team_id)
         if registered_hash:
@@ -107,4 +110,6 @@ def vote(request, recipient=None):
     return redirect('voting')
 
 
-
+@login_required
+def results(request):
+    return render(request, 'results.html', {})

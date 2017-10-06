@@ -9,8 +9,9 @@ urlpatterns = [
     url(r'^accounts/logout/', views.user_logout, name='logout'),
     url(r'^signup/', views.signup, name='signup'),
     url(r'^voting/', views.voting, name='voting'),
-
     url(r'^vote/(?P<recipient>.*)/$', views.vote, name='vote'),
+
+    url(r'^results/', views.results, name='results'),
 
     url(r'^$', views.home, name='home'),
 ]

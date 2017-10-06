@@ -162,6 +162,23 @@
     <a class="item">Work</a>
     <a class="item">Company</a>
     <a class="item">Careers</a>
+      {% if has_voted %}
+      <a href="#" class="item disabled">
+        <div class="ui success message">
+          <div class="header">
+            You have already voted.
+          </div>
+          Click the results button to see the results.
+      </div>
+      </a>
+      <div class="ui message">
+        <div class="header">
+          <a href="{% url 'results' %}" class="ui inverted green button">
+            Results
+          </a>
+        </div>
+      </div>
+    {% endif %}
     <div class="right menu">
      <div class="item">
          <i class="user circle outline icon"></i>
@@ -193,7 +210,10 @@
                     </div>
                     <div class="extra content">
                         <div class="ui two buttons">
-                            <a class="ui basic green button" href="{% url 'vote' recipient=votizen.team_hash%}">Vote</a>
+                            <a class="ui basic green button {% if has_voted %}disabled{% endif %}" 
+                               href="{% url 'vote' recipient=votizen.team_hash%}">
+                              Vote
+                            </a>
                         </div>
                     </div>
                 </div>                
