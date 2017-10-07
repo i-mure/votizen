@@ -3,6 +3,7 @@ import hashlib
 
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 
@@ -134,3 +135,29 @@ def results(request):
     return render(request, 'results.html', {
         'votes_per_user': results
     })
+
+@login_required
+def results_api(request):
+    reg_users = reg.find_one().get('transactions')
+    votes = vot.find_one().get('transactions')
+    votes_per_user = {}
+    for u in reg_users:
+        for v in votes:
+             if u['team_hash'] == v['recipient']:
+                  if not votes_per_user.get(u['team_hash'], None):
+                      votes_per_user[u['team_hash']] = {
+                        'count':1,
+                        'team_id': u['team_id']
+                      }
+                  else:
+                      votes_per_user[u['team_hash']]['count'] += 1
+    results = []
+    for key in votes_per_user:
+        id = votes_per_user[key]['team_id']
+        user = User.objects.filter(id=id).first()
+        user = user.__dict__
+        remove = ['_state', '_password']
+        for r in remove:
+            user.pop(r, None)
+        results.append({'team_hash': key, 'payload': votes_per_user[key], 'user':user})
+    return JsonResponse(results, safe=False)

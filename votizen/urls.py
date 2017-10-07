@@ -12,6 +12,8 @@ urlpatterns = [
     url(r'^vote/(?P<recipient>.*)/$', views.vote, name='vote'),
 
     url(r'^results/', views.results, name='results'),
+    url(r'^results_api/', views.results_api, name='results_api'),
+
 
     url(r'^$', views.home, name='home'),
 ]
