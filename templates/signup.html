@@ -126,9 +126,7 @@
 <div class="ui large top fixed hidden menu">
   <div class="ui container">
     <a class="active item">Home</a>
-    <a class="item">Work</a>
-    <a class="item">Company</a>
-    <a class="item">Careers</a>
+
     <div class="right menu">
       <div class="item">
         <a class="ui button teal" href="{% url 'login' %}">Log in</a>
@@ -140,9 +138,7 @@
 <!-- Sidebar Menu -->
 <div class="ui vertical inverted sidebar menu">
   <a class="active item">Home</a>
-  <a class="item">Work</a>
-  <a class="item">Company</a>
-  <a class="item">Careers</a>
+
   <a class="item teal" >Login</a>
 </div>
 
@@ -152,9 +148,7 @@
   <div class="ui large top fixed menu">
   <div class="ui container">
     <a class="active item">Home</a>
-    <a class="item">Work</a>
-    <a class="item">Company</a>
-    <a class="item">Careers</a>
+ 
     <div class="right menu">
       <div class="item">
         <a class="ui teal button" href="{% url 'login' %}">Log in</a>
@@ -173,7 +167,7 @@
            Team Email May be already registered.
       </div>
     {% endif %}
-    <div class="ui middle aligned stackable grid container">
+    <div class="ui middle aligned center aligned stackable grid container">
       <h1>Team Sign Up</h1>
       <div class="row">
           <div class="eight wide column">
@@ -183,20 +177,19 @@
             <div class="ui error message" id="errorMessage"></div>
         </div>
         <div class="field">
-    <label>Team Name</label>
     <input type="text" name="team_name" placeholder="Team Name">
   </div>
   <div class="field">
-    <label>Email Address</label>
     <input type="email" name="email" placeholder="Email">
   </div>
 <div class="field">
-    <label>Password</label>
     <input type="password" name="password" placeholder="Password">
   </div>
 <div class="field">
-    <label>Retype Password</label>
     <input type="password" name="password2" placeholder="Password Again">
+  </div>
+  <div class="field">
+    <textarea name="description" id="description" cols="30" rows="1" placeholder="Enter a short catch phrase" maxlength="30" style="resize:none;"></textarea>
   </div>
   <div class="field">
     <div class="ui checkbox">
@@ -204,7 +197,7 @@
       <label>I agree to the Terms and Conditions</label>
     </div>
   </div>
-  <button class="ui button" type="submit">Submit</button>
+  <button class="ui button teal" type="submit">Submit</button>
 </form>
           </div>
       </div>

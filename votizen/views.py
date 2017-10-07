@@ -27,8 +27,9 @@ def signup(request):
             team_name = request.POST['team_name']
             email = request.POST['email']
             password = request.POST['password']
+            description = request.POST['description']
 
-            team = User(first_name=team_name, username=email)
+            team = User(first_name=team_name, last_name=description, username=email)
             team.set_password(password)
             team.save()
         except Exception as e:
@@ -80,7 +81,7 @@ def voting(request):
     registered_hash = reg_block.team_registered(team_id)
     if registered_hash:
         voted = vot_block.team_voted(registered_hash)
-    users = list(User.objects.values('id', 'first_name'))
+    users = list(User.objects.values('id', 'first_name', 'last_name'))
     registered_votizens = reg.find_one().get('transactions')
     votizens = []
     for u in users:

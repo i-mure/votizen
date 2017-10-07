@@ -23,7 +23,7 @@ angular.
     </div>
        `,
     controller:['fetchRank','$scope' ,function RankListController(fetchRank,$scope) {
-          $scope.colors = ['red', 'teal', 'purple', 'green', 'yellow', 'gray', 'pink', 'orange'];
+          $scope.colors = ['red', 'teal', 'purple', 'green', 'yellow', 'gray', 'pink', 'orange', 'olive', 'violet', 'gray', 'black'];
           $scope.randomColor = () => {
             return $scope.colors[Math.floor(Math.random() * $scope.colors.length)];
           };

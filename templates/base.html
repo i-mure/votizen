@@ -130,9 +130,7 @@
 <div class="ui large top fixed hidden menu">
   <div class="ui container">
     <a class="active item" {% url 'home' %}>Home</a>
-    <a class="item">Work</a>
-    <a class="item">Company</a>
-    <a class="item">Careers</a>
+
     <div class="right menu">
       {% if not user.is_authenticated %}
         <div class="item">
@@ -149,9 +147,6 @@
 <!-- Sidebar Menu -->
 <div class="ui vertical inverted sidebar menu">
   <a class="active item" {% url 'home' %}>Home</a>
-  <a class="item" href="#">Work</a>
-  <a class="item" href="#">Company</a>
-  <a class="item" href="#">Careers</a>
   {% if  user.is_authenticated %}
     <a class="item teal" href="{% url 'login' %}">Login</a>
     <a class="item green" href="{% url 'signup' %}">Signup</a>
@@ -171,9 +166,7 @@
           <i class="sidebar icon"></i>
         </a>
         <a class="active item" {% url 'home' %}>Home</a>
-        <a class="item">Work</a>
-        <a class="item">Company</a>
-        <a class="item">Careers</a>
+  
         <div class="right item">
         {% if not user.is_authenticated %}
             <a class="ui teal inverted button" href="{% url 'login' %}">Log in</a>
@@ -199,11 +192,12 @@
     <div class="ui middle aligned stackable grid container">
       <div class="row">
         <div class="eight wide column">
-          <h3 class="ui header">We Help Companies and Companions</h3>
-          <p>We can give your company superpowers to do things that they never thought possible. Let us delight your customers and empower your needs...through pure data analytics.</p>
-          <h3 class="ui header">We Make Bananas That Can Dance</h3>
-          <p>Yes that's right, you thought it was the stuff of dreams, but even bananas can be bioengineered.</p>
+          <h3 class="ui header">We Help Countries, Enterprises & Individuals</h3>
+          <p>Elections being the only way disenfranchised individuals can excercise their power ,it is in their best interest for each vote to have as much weight as possible and this can only be done by ensuring that elections are free,fair and transparently verifiable to enable the freedoms to be expressed without delay</p>
+          <h3 class="ui header">What we make.</h3>
+          <p>Decentralised, Secure , Transparent & Verifiable Consensus Systems.</p>
         </div>
+
       </div>
       <div class="row">
         <div class="center aligned column">
