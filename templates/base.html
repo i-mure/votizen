@@ -134,10 +134,10 @@
     <div class="right menu">
       {% if not user.is_authenticated %}
         <div class="item">
-          <a class="ui">Log in</a>
+          <a class="ui" href="{% url 'login' %}">Log in</a>
         </div>
         <div class="item">
-          <a class="ui teal button">Sign Up</a>
+          <a class="ui teal button" href="{% url 'signup' %}">Sign Up</a>
         </div>
       {% endif %}
     </div>
@@ -199,37 +199,22 @@
         </div>
 
       </div>
-      <div class="row">
-        <div class="center aligned column">
-          <a class="ui huge button">Check Them Out</a>
-        </div>
-      </div>
     </div>
   </div>
   <div class="ui inverted vertical footer segment">
     <div class="ui container">
       <div class="ui stackable inverted divided equal height stackable grid">
         <div class="three wide column">
-          <h4 class="ui inverted header">About</h4>
-          <div class="ui inverted link list">
-            <a href="#" class="item">Sitemap</a>
-            <a href="#" class="item">Contact Us</a>
-            <a href="#" class="item">Religious Ceremonies</a>
-            <a href="#" class="item">Gazebo Plans</a>
-          </div>
-        </div>
-        <div class="three wide column">
           <h4 class="ui inverted header">Services</h4>
           <div class="ui inverted link list">
-            <a href="#" class="item">Banana Pre-Order</a>
-            <a href="#" class="item">DNA FAQ</a>
-            <a href="#" class="item">How To Access</a>
-            <a href="#" class="item">Favorite X-Men</a>
+            <a href="#" class="item">SAAS</a>
+            <a href="#" class="item">Corporate Plans</a>
+            <a href="#" class="item">Goverment & NGO Plans</a>
           </div>
         </div>
         <div class="seven wide column">
-          <h4 class="ui inverted header">Footer Header</h4>
-          <p>Extra space for a call to action inside the footer that could help re-engage users.</p>
+          <h4 class="ui inverted header">Votizen</h4>
+          <p>Ensuring transparency & Reliability in Elections.</p>
         </div>
       </div>
     </div>

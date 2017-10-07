@@ -7,6 +7,7 @@ angular.
        `
      <div class="ui vertical stripe segment">
       <h1 style="text-align:center;padding-bottom:10px;">Bithub Results</h1>
+      <br />
       <div class="ui middle aligned stackable grid container">
        <div class="ui celled list">
         <div class="ui red segment" ng-repeat="rank in ranks  | orderBy:'-payload.count' track by $index">

@@ -160,7 +160,7 @@ def results_api(request):
     for key in votes_per_user:
         id = votes_per_user[key]['team_id']
         user = User.objects.filter(id=id).first()
-        user = user.__dict__
+        user = user.__dict__ if user else {}
         remove = ['_state', '_password']
         for r in remove:
             user.pop(r, None)
