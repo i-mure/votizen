@@ -137,6 +137,10 @@ def results(request):
     })
 
 @login_required
+def leader_board(request):
+    return render(request, 'leader_dashboard.html', {})
+
+@login_required
 def results_api(request):
     reg_users = reg.find_one().get('transactions')
     votes = vot.find_one().get('transactions')

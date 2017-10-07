@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+{% load staticfiles %}
 <html lang="en" ng-app="votizenApp">
     <head>
         <title></title>
@@ -9,9 +9,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.9/semantic.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular-resource.js"> </script>
-    <script src =" ./app.js"></script>
-    <script src="./components/rankComponent.js"></script>
-    <script src=" ./components/rankService.js"></script>
+    <script src ="{% static "app.js" %}"></script>
+    <script src="{% static "components/rankComponent.js" %}"></script>
+    <script src="{% static "/components/rankService.js" %}"></script>
    
    
    
@@ -151,10 +151,10 @@ display: -webkit-flex;
         })
       ;
 
-      // create sidebar and attach to menu open
-      $('.ui.sidebar')
-        .sidebar('attach events', '.toc.item')
-      ;
+      // // create sidebar and attach to menu open
+      // $('.ui.sidebar')
+      //   .sidebar('attach events', '.toc.item')
+      // ;
 
     })
   ;
@@ -181,14 +181,14 @@ display: -webkit-flex;
 </div>
 
 <!-- Sidebar Menu -->
-<div class="ui vertical inverted sidebar menu">
+<!-- <div class="ui vertical inverted sidebar menu">
   <a class="active item">Home</a>
   <a class="item">Work</a>
   <a class="item">Company</a>
   <a class="item">Careers</a>
   <a class="item">Login</a>
   <a class="item">Signup</a>
-</div>
+</div> -->
 
 
 <!-- Page Contents -->
@@ -202,13 +202,10 @@ display: -webkit-flex;
     <div class="right menu">
      <div class="item">
          <i class="user circle outline icon"></i>
-        <a class>kelvinm442@gmail.com</a>
+        <a class>{{ user.first_name }}</a>
       </div>
       <div class="item">
-        <a class="ui button">Log in</a>
-      </div>
-      <div class="item">
-        <a class="ui primary button">Sign Up</a>
+        <a class="ui button" href="{% url 'logout' %}">Log Out</a>
       </div>
     </div>
   </div>
