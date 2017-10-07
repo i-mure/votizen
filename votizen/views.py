@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 
-from .blockchain import Block, reg
+from .blockchain import *
 
 reg_block = Block(block='REG', timestamp=datetime.datetime.utcnow(), previous_hash=None)
 vot_block = Block(block='VOT', timestamp=datetime.datetime.utcnow(), previous_hash=None)
@@ -120,12 +120,17 @@ def results(request):
         for v in votes:
              if u['team_hash'] == v['recipient']:
                   if not votes_per_user.get(u['team_hash'], None):
-                      votes_per_user[u['team_hash']] = 1
+                      votes_per_user[u['team_hash']] = {
+                        'count':1,
+                        'team_id': u['team_id']
+                      }
                   else:
-                      votes_per_user[u['team_hash']] += 1
-        # Change Hash to something else to allow for use in template, 
-        # merge other user details
-    
+                      votes_per_user[u['team_hash']]['count'] += 1
+    results = []
+    for key in votes_per_user:
+        id = votes_per_user[key]['team_id']
+        user = User.objects.filter(id=id).first()
+        results.append({'team_hash': key, 'payload': votes_per_user[key], 'user':user})
     return render(request, 'results.html', {
-        'votes_per_user': votes_per_user
+        'votes_per_user': results
     })

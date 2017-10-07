@@ -10,7 +10,7 @@
         </tr>
         <tr>
             {% for user in votes_per_user %}
-                
+                <li> {{ user.team_hash }} - {{ user.payload.count }} - {{ user.user.first_name }}</li>
             {% endfor %}
         </tr>
     </table>
