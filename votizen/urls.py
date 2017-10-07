@@ -12,6 +12,7 @@ urlpatterns = [
     url(r'^vote/(?P<recipient>.*)/$', views.vote, name='vote'),
 
     url(r'^results/', views.leader_board, name='leader_board'),
+    url(r'^results/', views.leader_board, name='results'),
     url(r'^results_api/', views.results_api, name='results_api'),
 
 
